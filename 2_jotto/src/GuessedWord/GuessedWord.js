@@ -5,7 +5,28 @@ const GuessedWord = ({ guessedWords }) => {
   return (
     <div data-test="component-guessedWord">
       {!!guessedWords.length ? (
-        <div></div>
+        <div data-test="guessed-words">
+          <h3>Guessed Words</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Guess</th>
+                <th>Matching Letters</th>
+              </tr>
+            </thead>
+            <tbody>
+              {guessedWords.map((word, idx) => (
+                <tr
+                  key={`guessed-words-item${idx}`}
+                  data-test="guessed-words-item"
+                >
+                  <td>{word.guessedWord}</td>
+                  <td>{word.letterMatchCount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <span data-test="game-instructions">Try to guess the secret word!</span>
       )}
