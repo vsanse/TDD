@@ -10,9 +10,9 @@ const Congrats = ({ success })  => {
   return (
     <div data-test="component-congrats">
       {success && (
-        <span data-test="congrats-message">
+        <p data-test="congrats-message" className="alert alert-success">
           Congratulations! You guessed the word!
-        </span>
+        </p>
       )}
     </div>
   );
