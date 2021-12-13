@@ -1,7 +1,8 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import WordInput from "./WordInput";
-import { checkProps, findByTestAttr } from "../../test/testUtils";
+import { checkProps, findByTestAttr, storeFactory } from "../../test/testUtils";
+import { Provider } from "react-redux";
 
 const mockSetCurrentGuess = jest.fn();
 
@@ -14,9 +15,14 @@ jest.mock("react", () => ({
 const defaultProps = {
   secretWord: "",
 };
-const setup = (props) => {
+const setup = (initialState={}, props) => {
+  const store = storeFactory(initialState)
   const setupProps = { ...defaultProps, ...props };
-  return shallow(<WordInput {...setupProps} />);
+  return mount(
+    <Provider store={store}>
+      <WordInput {...setupProps} />
+    </Provider>
+  );
 };
 describe("render", () => {
   describe("when success is true", () => {

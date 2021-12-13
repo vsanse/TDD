@@ -1,3 +1,9 @@
+import { actionTypes } from "../actions";
+
 export default function successReducer(state = false, action) {
-  return state;
+  if (action.type === actionTypes.CORRECT_GUESS) {
+    return true;
+  } else {
+    return state;
+  }
 }

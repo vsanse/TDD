@@ -1,13 +1,21 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import App from "./App";
-import { findByTestAttr } from "../test/testUtils";
+import { findByTestAttr, storeFactory } from "../test/testUtils";
 import { getSecretWord as mockGetSecretWord } from "./actions";
+import { Provider } from "react-redux";
 
 // activate global mock for getSecretWord
 jest.mock("./actions");
 
-const setup = () => mount(<App />);
+const setup = () => {
+  const store = storeFactory();
+  return mount(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
 test("renders without crashing", () => {
   const wrapper = setup();
   const component = findByTestAttr(wrapper, "component-app");
